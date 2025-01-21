@@ -1,4 +1,6 @@
 using ApiStockMarket.Data;
+using ApiStockMarket.Interfaces;
+using ApiStockMarket.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,8 @@ var ConnectionString = builder.Configuration.GetConnectionString("MysqlConnectio
 builder.Services.AddDbContext<ApplicationDBContext>(options=>{
     options.UseMySql(ConnectionString,ServerVersion.AutoDetect(ConnectionString));
 });
-
+builder.Services.AddScoped<IStockRepository , StockRepository>();
+builder.Services.AddScoped<ICommentRepository , CommentRepository>();
 
 var app = builder.Build();
 
