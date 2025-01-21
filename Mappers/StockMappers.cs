@@ -22,5 +22,28 @@ namespace ApiStockMarket.Mappers
                     MarketCap = stock.MarketCap
                 };
         }
+
+        public static Stock ToStockFromCreateDto(this CreateStockRequest stock)
+        {
+            return new Stock{
+                    Symbol = stock.Symbol,
+                    CompanyName = stock.CompanyName,
+                    Purchase = stock.Purchase,
+                    LastDiv = stock.LastDiv,
+                    Industry = stock.Industry,
+                    MarketCap = stock.MarketCap
+            };
+        }
+        public static Stock ToStockFromUpdateDto(this UpdateStockRequest stock)
+        {
+            return new Stock{
+                    Symbol = stock.Symbol,
+                    CompanyName = stock.CompanyName,
+                    Purchase = stock.Purchase,
+                    LastDiv = stock.LastDiv,
+                    Industry = stock.Industry,
+                    MarketCap = stock.MarketCap
+            };
+        }
     }
 }
