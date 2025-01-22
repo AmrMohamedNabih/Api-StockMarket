@@ -104,3 +104,7 @@
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/obj/Debug/net8.0/ApiStockMarket.sourcelink.json
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

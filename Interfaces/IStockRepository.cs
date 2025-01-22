@@ -14,5 +14,6 @@ namespace ApiStockMarket.Interfaces
         Task<Stock> CreateAsync(Stock stock);
         Task<Stock?> UpdateAsync( int id ,UpdateStockRequest stock);
         Task<Stock?> DeleteAsync( int id);
+        Task<bool> StockExists(int id);
     }
 }

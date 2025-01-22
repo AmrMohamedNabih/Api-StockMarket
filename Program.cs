@@ -12,6 +12,9 @@ builder.Services.AddSwaggerGen();
 
 // Controller Service
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options => {
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 
 // Data Base Service
 var ConnectionString = builder.Configuration.GetConnectionString("MysqlConnection");

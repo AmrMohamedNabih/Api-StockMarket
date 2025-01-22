@@ -46,8 +46,8 @@ namespace ApiStockMarket.Controllers
         {
             var StockModel = stock.ToStockFromCreateDto();
             await _stockRepo.CreateAsync(StockModel);
-            return Ok(StockModel.ToStockDto());
-            // return CreatedAtAction(nameof(GetById) , new {Id = StockModel.Id} , StockModel.ToStockDto());
+            // return Ok(StockModel.ToStockDto());
+            return CreatedAtAction(nameof(GetById) , new {Id = StockModel.Id} , StockModel.ToStockDto());
         }
 
         [HttpPut]

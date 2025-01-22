@@ -20,11 +20,11 @@ namespace ApiStockMarket.Repository
 
         public async Task<List<Stock>> GetAllAsync()
         {
-            return  await _context.Stocks.ToListAsync();
+            return  await _context.Stocks.Include(c => c.Comments).ToListAsync();
         }
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            var stock = await _context.Stocks.FindAsync(id);
+            var stock = await _context.Stocks.Include(c=> c.Comments).FirstOrDefaultAsync(i => i.Id == id);
             if(stock == null)
             {
                 return null;
@@ -64,6 +64,11 @@ namespace ApiStockMarket.Repository
             _context.Stocks.Remove(stock);
             await _context.SaveChangesAsync();
             return stock;
+        }
+
+        public async Task<bool> StockExists(int id)
+        {
+            return await _context.Stocks.AnyAsync(x => x.Id == id);
         }
     }
 }
