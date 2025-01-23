@@ -16,7 +16,8 @@ namespace ApiStockMarket.Mappers
                 Title = comment.Title,
                 Content = comment.Content,
                 CreatedOn = comment.CreatedOn,
-                StockId = comment.StockId
+                StockId = comment.StockId,
+                Stock = comment.Stock
             };
         }
         public static Comment ToCommentFromCreate(this CreateCommentDto comment ,int StockId)
@@ -25,6 +26,13 @@ namespace ApiStockMarket.Mappers
                 Title = comment.Title,
                 Content = comment.Content,
                 StockId = StockId,
+            };
+        }
+        public static Comment ToCommentFromUpdate(this UpdateCommentDto comment)
+        {
+            return new Comment{
+                Title = comment.Title,
+                Content = comment.Content,
             };
         }
     }

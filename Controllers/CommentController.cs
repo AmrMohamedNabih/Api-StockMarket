@@ -52,5 +52,11 @@ namespace ApiStockMarket.Controllers
             var Result = await _commentRepo.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById) , new {Id = commentModel.Id} , commentModel.ToCommentDto());
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id , [FromBody] UpdateCommentDto comment)
+        {
+            var commentModel = await _commentRepo.UpdateAsync(id , comment.ToCommentFromUpdate());
+            return commentModel != null ? Ok(commentModel.ToCommentDto()) : NotFound("comment not found");
+        }
     }
 }

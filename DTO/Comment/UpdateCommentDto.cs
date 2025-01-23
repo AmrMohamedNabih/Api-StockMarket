@@ -5,14 +5,9 @@ using System.Threading.Tasks;
 
 namespace ApiStockMarket.DTO.Comment
 {
-    public class CommentDto
+    public class UpdateCommentDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }= string.Empty;
         public string Content { get; set; } = string.Empty;
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-        public int? StockId { get; set; }
-        public ApiStockMarket.Models.Stock? Stock { get; set; }
-
     }
 }
