@@ -58,5 +58,11 @@ namespace ApiStockMarket.Controllers
             var commentModel = await _commentRepo.UpdateAsync(id , comment.ToCommentFromUpdate());
             return commentModel != null ? Ok(commentModel.ToCommentDto()) : NotFound("comment not found");
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var commentModel = await _commentRepo.DeleteAsync(id);
+            return commentModel? NoContent() : NotFound("comment not found");
+        }
     }
 }

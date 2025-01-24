@@ -47,5 +47,14 @@ namespace ApiStockMarket.Repository
             await _context.SaveChangesAsync();
             return existingComment;
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null) return false;
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
