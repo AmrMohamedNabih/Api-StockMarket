@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiStockMarket.Data;
 using ApiStockMarket.DTO.Stock;
+using ApiStockMarket.Helpers;
 using ApiStockMarket.Interfaces;
 using ApiStockMarket.Mappers;
 using ApiStockMarket.Models;
@@ -23,13 +24,13 @@ namespace ApiStockMarket.Controllers
             _stockRepo = stockRepo;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var stock = await _stockRepo.GetAllAsync();
+            var stock = await _stockRepo.GetAllAsync(query);
             var Results = stock.Select(s=> s.ToStockDto());
             return Ok(Results);
         }

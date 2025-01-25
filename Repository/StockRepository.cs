@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiStockMarket.Data;
 using ApiStockMarket.DTO.Stock;
+using ApiStockMarket.Helpers;
 using ApiStockMarket.Interfaces;
 using ApiStockMarket.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,28 @@ namespace ApiStockMarket.Repository
             _context = context;
         }
 
-        public async Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            return  await _context.Stocks.Include(c => c.Comments).ToListAsync();
+            var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+            if(!string.IsNullOrWhiteSpace(query.Symbol))
+            {
+                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol) );
+            }
+            if(!string.IsNullOrWhiteSpace(query.CompanyName))
+            {
+                stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName) );
+            }
+            if(!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                if(query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderByDescending(s =>s.Symbol);
+                }
+            }
+
+            var SkipPage = (query.PageNumber - 1)* query.PageSize;
+
+            return  await stocks.Skip(SkipPage).Take(query.PageSize).ToListAsync();
         }
         public async Task<Stock?> GetByIdAsync(int id)
         {
