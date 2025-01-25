@@ -25,14 +25,22 @@ namespace ApiStockMarket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stock = await _stockRepo.GetAllAsync();
             var Results = stock.Select(s=> s.ToStockDto());
             return Ok(Results);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute]int id)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stock = await _stockRepo.GetByIdAsync(id);
             if(stock == null)
             {
@@ -44,6 +52,10 @@ namespace ApiStockMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateStockRequest stock)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var StockModel = stock.ToStockFromCreateDto();
             await _stockRepo.CreateAsync(StockModel);
             // return Ok(StockModel.ToStockDto());
@@ -51,9 +63,13 @@ namespace ApiStockMarket.Controllers
         }
 
         [HttpPut]
-        [Route("{Id}")]
+        [Route("{Id:int}")]
         public async Task<IActionResult> Update([FromRoute] int Id , [FromBody] UpdateStockRequest stock )
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var StockModel = await _stockRepo.UpdateAsync(Id, stock);
             if(StockModel == null)
             {
@@ -63,9 +79,13 @@ namespace ApiStockMarket.Controllers
         }
 
         [HttpDelete]
-        [Route("{Id}")]
+        [Route("{Id:int}")]
         public async Task<IActionResult> delete([FromRoute]int Id)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var StockModel = await _stockRepo.DeleteAsync(Id);
             if (StockModel == null)
             {
