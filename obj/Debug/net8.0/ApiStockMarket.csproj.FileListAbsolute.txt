@@ -108,3 +108,12 @@
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/amrnabih/Documents/ASP .NET/ApiStockMarket/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
