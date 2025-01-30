@@ -2,6 +2,7 @@ using ApiStockMarket.Data;
 using ApiStockMarket.Interfaces;
 using ApiStockMarket.Models;
 using ApiStockMarket.Repository;
+using ApiStockMarket.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,20 +43,21 @@ builder.Services.AddAuthentication(options => {
     options.DefaultSignInScheme =
     options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options => {
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:IssuerSigningKey"]))
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SignInKey"]))
     };
 }
 );
 
 builder.Services.AddScoped<IStockRepository , StockRepository>();
 builder.Services.AddScoped<ICommentRepository , CommentRepository>();
+builder.Services.AddScoped<ITokenService , TokenService>();
 
 var app = builder.Build();
 
