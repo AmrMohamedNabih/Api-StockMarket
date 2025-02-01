@@ -31,7 +31,7 @@ namespace ApiStockMarket.Controllers
                 return BadRequest(ModelState);
             }
             var stock = await _stockRepo.GetAllAsync(query);
-            var Results = stock.Select(s=> s.ToStockDto());
+            var Results = stock.Select(s=> s.ToStockDto()).ToList();
             return Ok(Results);
         }
 

@@ -21,7 +21,7 @@ namespace ApiStockMarket.Repository
 
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+            var stocks = _context.Stocks.Include(s => s.Comments).ThenInclude(a => a.AppUser).AsQueryable();
             if(!string.IsNullOrWhiteSpace(query.Symbol))
             {
                 stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol) );
@@ -44,7 +44,7 @@ namespace ApiStockMarket.Repository
         }
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            var stock = await _context.Stocks.Include(c=> c.Comments).FirstOrDefaultAsync(i => i.Id == id);
+            var stock = await _context.Stocks.Include(c=> c.Comments).ThenInclude(a => a.AppUser).FirstOrDefaultAsync(i => i.Id == id);
             if(stock == null)
             {
                 return null;

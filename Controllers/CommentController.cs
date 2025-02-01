@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiStockMarket.DTO.Comment;
+using ApiStockMarket.Extensions;
 using ApiStockMarket.Interfaces;
 using ApiStockMarket.Mappers;
+using ApiStockMarket.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiStockMarket.Controllers
@@ -15,11 +18,13 @@ namespace ApiStockMarket.Controllers
     {
         private readonly ICommentRepository _commentRepo;
         private readonly IStockRepository _stockRepo;
+        private readonly  UserManager<AppUser> _userManager;
 
-        public CommentController(ICommentRepository commentRepo , IStockRepository stockRepo)
+        public CommentController(ICommentRepository commentRepo , IStockRepository stockRepo , UserManager<AppUser> userManager) 
         {
             _commentRepo = commentRepo;
             _stockRepo = stockRepo;
+            _userManager = userManager;
 
         }
         [HttpGet]
@@ -60,7 +65,10 @@ namespace ApiStockMarket.Controllers
             {
                 return BadRequest("Stock does not exists");
             }
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
             var commentModel = comment.ToCommentFromCreate(stockId);
+            commentModel.AppUserId = appUser.Id;
             var Result = await _commentRepo.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById) , new {Id = commentModel.Id} , commentModel.ToCommentDto());
         }

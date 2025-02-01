@@ -13,7 +13,7 @@ namespace ApiStockMarket.Repository
     {
         private readonly ApplicationDBContext _context;
 
-        public CommentRepository(ApplicationDBContext context )
+        public CommentRepository(ApplicationDBContext context)
         {
             _context = context;
         }
@@ -21,11 +21,11 @@ namespace ApiStockMarket.Repository
 
         public async Task<List<Comment>> GetAllAsync()
         {
-            return await _context.Comments.Include(c=>c.Stock).ToListAsync();
+            return await _context.Comments.Include(c => c.AppUser).ToListAsync();
         }
         public async Task<Comment?> GetByIdAsync(int id)
         {
-            var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            var comment = await _context.Comments.Include(c => c.AppUser).FirstOrDefaultAsync(x => x.Id == id);
             return comment;
         }
         public async Task<Comment> CreateAsync(Comment comment)
@@ -38,7 +38,7 @@ namespace ApiStockMarket.Repository
         public async Task<Comment?> UpdateAsync(int id, Comment comment)
         {
             var existingComment = await _context.Comments.FindAsync(id);
-            if(existingComment == null)
+            if (existingComment == null)
             {
                 return null;
             }

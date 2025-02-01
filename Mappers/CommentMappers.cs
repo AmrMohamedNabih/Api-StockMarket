@@ -11,18 +11,21 @@ namespace ApiStockMarket.Mappers
     {
         public static CommentDto ToCommentDto(this Comment comment)
         {
-            return new CommentDto{
+            return new CommentDto
+            {
                 Id = comment.Id,
                 Title = comment.Title,
                 Content = comment.Content,
                 CreatedOn = comment.CreatedOn,
                 StockId = comment.StockId,
+                CreatedBy = comment.AppUser.UserName,
                 Stock = comment.Stock
             };
         }
-        public static Comment ToCommentFromCreate(this CreateCommentDto comment ,int StockId)
+        public static Comment ToCommentFromCreate(this CreateCommentDto comment, int StockId)
         {
-            return new Comment{
+            return new Comment
+            {
                 Title = comment.Title,
                 Content = comment.Content,
                 StockId = StockId,
@@ -30,7 +33,8 @@ namespace ApiStockMarket.Mappers
         }
         public static Comment ToCommentFromUpdate(this UpdateCommentDto comment)
         {
-            return new Comment{
+            return new Comment
+            {
                 Title = comment.Title,
                 Content = comment.Content,
             };
