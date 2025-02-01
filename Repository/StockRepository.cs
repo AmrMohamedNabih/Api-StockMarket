@@ -90,5 +90,10 @@ namespace ApiStockMarket.Repository
         {
             return await _context.Stocks.AnyAsync(x => x.Id == id);
         }
+
+        public async Task<Stock?> GetBySymbolAsync(string Symbol)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(x => x.Symbol == Symbol);
+        }
     }
 }
